@@ -42,13 +42,19 @@ namespace PeopleProject
 
 		public double GetAverageScoreOfStudents()
 		{
-			return People.Where(p => p.IsStudent).Average(p => p.Score);
+			List<Person> students = People.Where(p => p.IsStudent).ToList();
+			if (students.Count == 0) return 0;
+
+			return students.Average(p => p.Score);
 		}
 
-		public Person GetOldestStudent()
+		public Person? GetOldestStudent()
 		{
-			return People.Where(p => p.IsStudent).OrderByDescending(p => p.Age).First();
-		}
+			List<Person> students = People.Where(p => p.IsStudent).ToList();
+			if (students.Count == 0) return null;
+
+			return students.OrderByDescending(p => p.Age).First();
+	}
 
 		public bool IsAnyOneFailing()
 		{
