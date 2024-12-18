@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PeopleProject
+﻿namespace PeopleProject
 {
 	public class PersonStatistics
 	{
@@ -27,21 +21,25 @@ namespace PeopleProject
 
 		public double GetAverageAge()
 		{
+			if (People.Count == 0) return 0;
 			return People.Average(p => p.Age);
 		}
 
 		public int GetNumberOfStudents()
 		{
+			if (People.Count == 0) return 0;
 			return People.Count(p => p.IsStudent);
 		}
 
-		public Person GetPersonWithHighestScore()
+		public Person? GetPersonWithHighestScore()
 		{
+			if (People.Count == 0) return null;
 			return People.OrderByDescending(p => p.Score).First();
 		}
 
 		public double GetAverageScoreOfStudents()
 		{
+			if (People.Count == 0) return 0;
 			List<Person> students = People.Where(p => p.IsStudent).ToList();
 			if (students.Count == 0) return 0;
 
@@ -50,6 +48,7 @@ namespace PeopleProject
 
 		public Person? GetOldestStudent()
 		{
+			if (People.Count == 0) return null;
 			List<Person> students = People.Where(p => p.IsStudent).ToList();
 			if (students.Count == 0) return null;
 
@@ -58,6 +57,7 @@ namespace PeopleProject
 
 		public bool IsAnyOneFailing()
 		{
+			if (People.Count == 0) return false;
 			return People.Any(p => p.Score < 40);
 		}
 	}

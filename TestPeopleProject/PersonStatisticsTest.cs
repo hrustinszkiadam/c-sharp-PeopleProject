@@ -108,6 +108,13 @@ namespace TestPeopleProject
 		}
 
 		[Test]
+		[Category("GetAverageAge")]
+		public void GetAverageAge_UresLista_0()
+		{
+			Assert.That(stats.GetAverageAge(), Is.EqualTo(0));
+		}
+
+		[Test]
 		[Category("GetNumberOfStudents")]
 		[TestCase(true, false, true, false, ExpectedResult = 2)]
 		[TestCase(false, false, false, false, ExpectedResult = 0)]
@@ -127,6 +134,13 @@ namespace TestPeopleProject
 		}
 
 		[Test]
+		[Category("GetNumberOfStudents")]
+		public void GetNumberOfStudents_UresLista_0()
+		{
+			Assert.That(stats.GetNumberOfStudents(), Is.EqualTo(0));
+		}
+
+		[Test]
 		[Category("GetPersonWithHighestScore")]
 		[TestCase(0, 0, 0, 0, ExpectedResult = 1)]
 		[TestCase(100, 0, 0, 0, ExpectedResult = 1)]
@@ -134,7 +148,7 @@ namespace TestPeopleProject
 		[TestCase(0, 0, 50, 0, ExpectedResult = 3)]
 		[TestCase(0, 0, 0, 25, ExpectedResult = 4)]
 		[TestCase(69, 42, 96, 9, ExpectedResult = 3)]
-		public int GetPersonWithHighestScore_HelyesenMukodik(int score1, int score2, int score3, int score4)
+		public int? GetPersonWithHighestScore_HelyesenMukodik(int score1, int score2, int score3, int score4)
 		{
 			stats.People = new List<Person>
 			{
@@ -144,7 +158,14 @@ namespace TestPeopleProject
 				new Person(4, "Jill Doe", 0, false, score4)
 			};
 
-			return stats.GetPersonWithHighestScore().Id;
+			return stats.GetPersonWithHighestScore()?.Id;
+		}
+
+		[Test]
+		[Category("GetPersonWithHighestScore")]
+		public void GetPersonWithHighestScore_UresLista_Null()
+		{
+			Assert.IsNull(stats.GetPersonWithHighestScore());
 		}
 
 		[Test]
@@ -169,6 +190,13 @@ namespace TestPeopleProject
 		}
 
 		[Test]
+		[Category("GetAverageScoreOfStudents")]
+		public void GetAverageScoreOfStudents_UresLista_0()
+		{
+			Assert.That(stats.GetAverageScoreOfStudents(), Is.EqualTo(0));
+		}
+
+		[Test]
 		[Category("GetOldestStudent")]
 		[TestCase(new int[] { 10, 10, 10, 10 }, new bool[] { false, false, false, false }, ExpectedResult = null)]
 		[TestCase(new int[] { 0, 0, 0, 0 }, new bool[] { true, false, true, false }, ExpectedResult = 1)]
@@ -190,6 +218,13 @@ namespace TestPeopleProject
 		}
 
 		[Test]
+		[Category("GetOldestStudent")]
+		public void GetOldestStudent_UresLista_Null()
+		{
+			Assert.IsNull(stats.GetOldestStudent());
+		}
+
+		[Test]
 		[Category("IsAnyOneFailing")]
 		[TestCase(0, 0, 0, 0, ExpectedResult = true)]
 		[TestCase(39, 40, 41, 42, ExpectedResult = true)]
@@ -207,6 +242,13 @@ namespace TestPeopleProject
 			};
 
 			return stats.IsAnyOneFailing();
+		}
+
+		[Test]
+		[Category("IsAnyOneFailing")]
+		public void IsAnyOneFailing_UresLista_False()
+		{
+			Assert.IsFalse(stats.IsAnyOneFailing());
 		}
 
 	}
